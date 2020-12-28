@@ -35,7 +35,12 @@ class CheckerBoard {
     the moveValid() function call*/
     std::vector<Position> jumpStack;
 
-    Piece* getPiece(Position pos) const { return pieces[pos.x][pos.y]; }
+    Piece* getPiece(Position pos) const {
+        if (pos.x < 0 || pos.y < 0 || pos.x > 8 || pos.y > 8)
+            return nullptr;
+
+        return pieces[pos.x][pos.y]; 
+    }
     //brokenn, you CANT make this work!
     /*void deletePiece(Piece* pc) {
     	delete[] pc;
@@ -70,8 +75,6 @@ class CheckerBoard {
 
 public:
     bool pieceExists(Position pos) const {
-        if (pos.x < 0 || pos.y < 0 || pos.x > 8 || pos.y > 8)
-            return false;
 
         return getPiece(pos) != nullptr; 
     }
