@@ -9,32 +9,39 @@ void printBoard(CheckerBoard& board) {
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-        	char out;
+        	int out;
 
         	if (board.pieceExists({ j, 7-i })) {
                 Piece pc = board.getPieceCopy({ j, 7-i });
 
             	if (pc.color == Red) {
-            		out = 'r';
+                    if (pc.type == Checker) {
+                        std::cout << "\u265F";
+                    } else {
+                        std::cout << "\u265C";
+                    }
             	} else {
-            		out = 'w';
+                    if (pc.type == Checker) {
+                        std::cout << "\u2659";
+                    } else {
+                        std::cout << "\u2654";
+                    }
             	}
 
-            	if (pc.type == King)
-            		out = toupper(out);
         	} else {
-        		out = '0';
+        		std::cout << ((j+i%2)%2 ? " " : "\u2588");//\u2593
         	}
 
-        	std::cout << out << "  ";
+        	std::cout << ((j+i%2)%2 ? " " : "\u2588");
         }
         std::cout << "\n";
     }
 }
 
-/*Position parseIn(std::string const& in) {
-    return Position {toupper(in[0]) - 'A', in[1] - '0' + 1};
-}*/
+
+Position parseIn(std::string const& in) {
+    return Position {toupper(in[0]) - 'A', in[1] - '1'};
+}
  
 int main() {
     CheckerBoard board;
@@ -51,8 +58,8 @@ int main() {
         std::cin >> start;
 
         //put a comma between the start and end position
-        char ch;
-        std::cin >> ch;
+        /*char ch;
+        std::cin >> ch;*/
         
         Position end;
         std::cin >> end;
