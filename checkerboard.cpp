@@ -186,7 +186,6 @@ void CheckerBoard::movePiece(Position start, Position end) {
     if (moveValid(start, end) && startPc->color == getTurn()) {
     	//it's a (single) jump
         while (jumpStack.size() > 0) {
-    		//nigga got jumped!
     		Position jumpedPos = jumpStack.back();
     		Piece* jumped = getPiece(jumpedPos);
 
