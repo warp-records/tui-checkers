@@ -59,8 +59,8 @@ class CheckerBoard {
     otherwise it will return an empty vector*/
 
     void deletePiece(Position pos) {
+	delete[] getPiece(pos);
     	pieces[pos.x][pos.y] = nullptr;
-    	delete[] getPiece(pos);
     }
 
     //for actually moving it
