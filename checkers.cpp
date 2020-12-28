@@ -58,8 +58,8 @@ int main() {
         std::cin >> start;
 
         //put a comma between the start and end position
-        /*char ch;
-        std::cin >> ch;*/
+        char ch;
+        std::cin >> ch;
         
         Position end;
         std::cin >> end;
