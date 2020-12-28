@@ -58,9 +58,15 @@ CheckerBoard::CheckerBoard() {
         pieces[i][7-(i+1)%2] = new Piece {White, Checker};
     }
 
-    pieces[2][2] = new Piece {White, Checker};
+    for (int i = 0; i < 4; i++) {
+        pieces[i*2][2] = new Piece {Red, Checker};
+
+        pieces[i*2+1][5] = new Piece {White, Checker};
+    }
+
+    /*pieces[2][2] = new Piece {White, Checker};
     pieces[2][4] = new Piece {White, Checker};
-    deletePiece({3, 7});
+    deletePiece({3, 7});*/
 }
 
 
@@ -81,7 +87,7 @@ bool CheckerBoard::moveValid(Position start, Position end, bool recursive = fals
     
     if (!pc && !recursive)
         return false;
-    if (pieces[end.x][end.y])
+    if (pieceExists(end))
         return false;
         
     //make sure direction matches color, or ignore if king
@@ -117,12 +123,12 @@ bool CheckerBoard::moveValid(Position start, Position end, bool recursive = fals
 
                 Position attemptedMove {start.x+j, start.y+i};
 
-                std::cout << "attemptedMove: " << attemptedMove << '\n';
+                //std::cout << "attemptedMove: " << attemptedMove << '\n';
 
                 if (pieceExists(jumpedPos) && jumped->color != jumper->color) {
                         if (jumpStack.size() == 0 || jumpedPos != jumpStack.back()) {
                         jumpStack.push_back(jumpedPos);
-                        std::cout << "Jumped to " << attemptedMove << "!\n";
+                        //std::cout << "Jumped to " << attemptedMove << "!\n";
                         //REUCRSION GO BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR!!!!!
                         if (moveValid(attemptedMove, end, true))
                             return true;
